@@ -10,7 +10,7 @@ import (
 	"time"
 
 	"github.com/chuckpreslar/emission"
-	"github.com/cloudwebrtc/nats-protoo/logger"
+	"github.com/evo3cx/nats-protoo/logger"
 	nats "github.com/nats-io/nats.go"
 )
 
@@ -45,7 +45,7 @@ func NewNatsProtoo(server string) *NatsProtoo {
 	}
 	np.nc = nc
 	np.nc.SetClosedHandler(func(nc *nats.Conn) {
-		logger.Warnf("%s [%v]", "nats nc closed", nc.LastError)
+		logger.Warnf("nats nc closed [%v]", nc.LastError())
 		np.Emit("close", 0, nc.LastError().Error)
 		np.closed = true
 	})
@@ -169,11 +169,11 @@ func (np *NatsProtoo) Close() {
 	np.mutex.Lock()
 	defer np.mutex.Unlock()
 	if np.closed == false {
-		logger.Infof("Close nats nc now : ", np)
+		logger.Infof("Close nats nc now : %v", np)
 		np.nc.Close()
 		np.closed = true
 	} else {
-		logger.Warnf("Transport already closed :", np)
+		logger.Warnf("Transport already closed : %v", np)
 	}
 }
 

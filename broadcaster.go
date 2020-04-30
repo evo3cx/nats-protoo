@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 
 	"github.com/chuckpreslar/emission"
-	"github.com/cloudwebrtc/nats-protoo/logger"
+	"github.com/evo3cx/nats-protoo/logger"
 	nats "github.com/nats-io/nats.go"
 )
 
